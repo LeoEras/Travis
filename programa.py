@@ -109,12 +109,8 @@ class Libro(object):
     Modulo de Libro
     """
     def __init__(self,categoria="CE",estado=0):
-        if categoria not in ["CE", "CN", "CS", "CH"]:
-            self.valido=0
-        else:
-            self.categoria=categoria
+        self.categoria=categoria
         self.estado=estado
-        self.valido=1
 
     def prestamo(self,fecha=""):
         """
@@ -123,16 +119,16 @@ class Libro(object):
         :param fecha: fecha en la que el usuario pide el libro, en formato dd/mm/aaaa
         :return: dia en el que el libro se debe de devolver, 0 si no se puede prestar.
         """
-        if self.valido==1:
-            if self.estado==0:
-                now=datetime.datetime.strptime(fecha, "%d/%m/%Y")
-                if self.categoria in "CE":
-                    until=datetime.timedelta(days=7)
-                    return (now+until).strftime('%d/%m/%Y')
-                else:
-                    until=datetime.timedelta(days=14)
-                    return (now+until).strftime('%d/%m/%Y')
+        if self.categoria not in ["CE", "CN", "CS", "CH"]:
+            return
+        
+        if self.estado==0:
+            now=datetime.datetime.strptime(fecha, "%d/%m/%Y")
+            if self.categoria in "CE":
+                until=datetime.timedelta(days=7)
+                return (now+until).strftime('%d/%m/%Y')
             else:
-                return 0b0
+                until=datetime.timedelta(days=14)
+                return (now+until).strftime('%d/%m/%Y')
         else:
             return 0b0

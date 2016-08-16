@@ -20,7 +20,7 @@ class SimpleTestCase(unittest.TestCase):
 
     def testE(self):
         libro = Libro("AD", 1)
-        assert libro.prestamo("10/02/2015") == 0
+        assert libro.prestamo("10/02/2015") == None
         
 if __name__ == "__main__":
     unittest.main()
