@@ -132,3 +132,7 @@ class Libro(object):
                 return (now+until).strftime('%d/%m/%Y')
         else:
             return 0b0
+
+tarjeta=Tarjeta("Leo","Eras","0928358",2.0)
+bus=Bus()
+print(bus.cobrar_pasaje(tarjeta,1))
